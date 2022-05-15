@@ -1,0 +1,10 @@
+Django==4.0.4
+django-bootstrap-form==3.4
+django-ckeditor==6.4.0
+django-filter==21.1
+django-js-asset==2.0.0
+django-on-heroku==1.1.2
+ipdb==0.13.9
+jedi==0.18.1
+mysqlclient==2.1.0
+Pillow==9.1.0
