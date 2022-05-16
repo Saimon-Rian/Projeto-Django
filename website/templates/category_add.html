@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Criar categoria{% endblock %}
+{% block content %}
+<h1>Criar categoria</h1>
+    {% if user.is_authenticated %}
+        <div>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-secondary">Adicionar!</button>
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Deletar "{{ category.category_name }}"{% endblock %}
+{% block content %}
+
+<h1>Deletar "{{ category.category_name }}"?</h1>
+<br>
+    {% if user.is_authenticated %}
+        <div class="form-group">
+            <form method="POST">
+                {% csrf_token %}
+                <h5>Isso irá deletar todos os posts com a categoria "{{ category.category_name }}"</h5>
+                <br>
+                <strong>Tem certeza que deseja apagar "{{ category.category_name }}"?</strong>
+                <br>
+                <br>
+                <a href="{% url 'category_delete' category.id %}" class="btn btn-secondary">Deletar!</a>
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}

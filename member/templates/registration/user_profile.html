@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Perfil de Usuário{% endblock %}
+{% block content %}
+<br>
+<h1 class="text-center">Perfil de usuário</h1>
+
+<div class="card mb-3">
+    <div class="row no-gutters">
+        <div class="col-md-2">
+            {% if profile.profile_picture %}
+                <img src="{{ profile.profile_picture.url }}" class="card-img">
+            {% endif %}
+        </div>
+        <div class="col-md-10">
+            <div class="card-body">
+                <div class="card-title">
+                    <h3>{{ profile.user.username }}</h3>
+                    <small>Nome: {{ profile.user.first_name }} {{ profile.user.last_name }}</small>
+                </div>
+                <hr>
+                <p class="card-text">Redes Sociais:<br>
+                    {{ profile.social_medias|safe }}
+                </p>
+                <hr>
+                <p class="card-text">Bio:<br>
+                    {{ profile.bio|safe }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

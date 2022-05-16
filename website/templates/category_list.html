@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Suas categorias{% endblock %}
+
+{% block content %}
+<br>
+<h1 class="text-center">Categorias</h1>
+<ul>
+    {% for category in categories %}
+        {% if user.is_authenticated %}
+        <br>
+           <li>
+               {{ category.category_name }}- <a href="{% url 'category_confirm' category.id %}">Deletar!</a>
+           </li>
+        {% endif %}
+    {% endfor %}
+    <br>
+</ul>
+<a class="btn btn-secondary" href="{% url 'category_add' %}">Criar categoria</a>
+{% endblock %}

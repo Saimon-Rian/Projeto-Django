@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}{{ cat }}{% endblock %}
+
+{% block content %}
+
+{% if categories_posts %}
+    <br>
+    <h1 class="text-center">{{ cat }}</h1>
+<ul>
+    {% for post in categories_posts %}
+        <br>
+        <div class="col-md-10">
+            <div class="card mb-3">
+                <div class="card header">
+                    {% if post.author.user_profile != '' %}
+                        <a href="{% url 'user_profile' post.author.id %}">{{ post.author.username }}</a>
+                    {% else %}
+                        {{ post.author.username }}
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <br>
+                    Título: <a href="{% url 'post_detail' post.id %}">{{ post.title }}</a> -
+                   {% if post.category %}
+                        <a href="{% url 'categories' post.category.category_name %}">{{ post.category }}</a> -
+                   {% endif %}
+                   {{ post.post_date }} <br> {{ post.body|slice:"200"|safe }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</ul>
+{% else %}
+<h2>Página não encontrada...</h2>
+{% endif %}
+<a href="{% url 'home' %}" class="btn btn-secondary">Voltar</a>
+{% endblock %}

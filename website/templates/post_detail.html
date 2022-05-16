@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Detalhes/{{ post.title }}{% endblock %}
+{% block content %}
+    <br>
+    <h1>{{ post.title }}</h1>
+
+<small class="text-center">Por: {{ post.author.username }}
+    - {{ post.post_date }} -
+    {% if post.category %}
+        <a href="{% url 'categories' post.category.category_name %}">{{ post.category }}</a>
+    {% endif %}
+    {% if user.is_authenticated %}
+        {% if user.id == post.author.id %}
+            - <a href="{% url 'post_edit' post.id %}">Editar</a>
+            - <a href="{% url 'confirm' post.id %}">Deletar</a>
+        {% endif %}
+    {% endif %}
+</small>
+<br>
+<hr>
+<br>
+{% if post.header_image %}
+    <img src="{{ post.header_image.url }}">
+{% endif %}
+<br>
+{{ post.body|safe }}
+<br>
+<br>
+<a href="{% url 'home'%}" class="btn btn-primary">Início</a>
+{% endblock %}

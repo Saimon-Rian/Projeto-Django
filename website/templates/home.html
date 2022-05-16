@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}Página inicial{% endblock %}
+{% block content %}
+<h1 class="text-center">Posts</h1>
+<div>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="date" name="start_date" >
+        <input type="date" name="end_date" >
+        <button type="submit" class="btn btn-secondary">Filtrar</button>
+    </form>
+    <br>
+    <form method="GET">
+        {% if filters.author_username %}
+            <input type="text" name="author" placeholder="Autores" value="{{ filters.author_username }}">
+        {% else %}
+            <input type="text" name="author" placeholder="Autores">
+        {% endif %}
+        <select name="categories">
+            <option></option>
+            {% for category in categories %}
+                {% if category.category_name == filters.category_name %}
+                    <option selected="selected" value="{{ category.category_name }}">{{ category.category_name }}</option>
+                {% else %}
+                    <option value="{{ category.category_name }}">{{ category.category_name }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-secondary">Pesquisar</button>
+    </form>
+
+    {% if post_list == None %}
+        {% for post in posts %}
+        <br>
+            <div class="col-md-10">
+                <div class="card mb-3">
+                    <div class="card header">
+                        {% if post.author.user_profile != '' %}
+                            <a href="{% url 'user_profile' post.author.id %}">{{ post.author.username }}</a>
+                        {% else %}
+                            {{ post.author.username }}
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <br>
+                        Título: <a href="{% url 'post_detail' post.id %}">{{ post.title }}</a> -
+                       {% if post.category %}
+                            <a href="{% url 'categories' post.category.category_name %}">{{ post.category }}</a> -
+                       {% endif %}
+                       {{ post.post_date }} <br> {{ post.body|slice:"200"|safe }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+       {% for post in post_list %}
+            <div class="col-md-10">
+                <div class="card mb-3">
+                    <div class="card header">
+                        {% if post.author.user_profile != '' %}
+                            <a href="{% url 'user_profile' post.author.id %}">{{ post.author.username }}</a>
+                        {% else %}
+                            {{ post.author.username }}
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <br>
+                       Título: <a href="{% url 'post_detail' post.id %}">{{ post.title }}</a> -
+                       {% if post.category %}
+                            <a href="{% url 'categories' post.category.category_name %}">{{ post.category }}</a> -
+                       {% endif %}
+                       {{ post.post_date }} <br> {{ post.body|slice:"200"|safe }}
+                    </div>
+                </div>
+            </div>
+       {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Crie um perfil!{% endblock %}
+{% block content %}
+<h1>Criar perfil de usuário</h1>
+    {% if user.is_authenticated %}
+        <div class="form-group">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-secondary">Criar!</button>
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}

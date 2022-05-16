@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Deletar/{{ post.title }}{% endblock %}
+{% block content %}
+
+<h1>Deletar "{{ post.title }}"?</h1>
+<br>
+    {% if user.is_authenticated %}
+        {% if user.id == post.author.id %}
+            <div class="form-group">
+                <form method="POST">
+                    {% csrf_token %}
+                    {% if post.header_image %}
+                        <img src="{{ post.header_image.url }}">
+                    {% endif %}
+                    {{ post.body|safe }}<br><br>
+                    <strong>Tem certeza que deseja apagar "{{ post.title }}"?</strong>
+                    <br>
+                    <br>
+                    <a href="{% url 'post_delete' post.id %}" class="btn btn-secondary">Deletar!</a>
+                </form>
+            </div>
+        {% endif %}
+    {% endif %}
+{% endblock %}
