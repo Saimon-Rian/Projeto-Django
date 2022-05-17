@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os.path
-import django_on_heroku
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,7 +25,7 @@ SECRET_KEY = 'django-insecure-!x)qv#ftx4h=$p@3%^)ng*7%(+(!*eqboq)w4e!cbbqf$=+0e9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://creeksecrets.herokuapp.com/']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -42,7 +41,6 @@ INSTALLED_APPS = [
     'member',
     'ckeditor',
     'django_filters',
-    'bootstrapform',
 ]
 
 MIDDLEWARE = [
@@ -129,8 +127,6 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-django_on_heroku.settings(locals())
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
