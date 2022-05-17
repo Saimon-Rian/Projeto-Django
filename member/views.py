@@ -13,7 +13,7 @@ def create_user(request):
         form = SignUpForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('login')
     data = {
         'form': form
     }
@@ -28,7 +28,7 @@ def create_profile(request):
             profile = form.save(commit=False)
             profile.user_id = request.user.id
             profile.save()
-            return redirect('home')
+            return redirect('user_page')
     data = {
         'form': form,
     }

@@ -45,7 +45,7 @@
                         <br>
                         Título: <a href="{% url 'post_detail' post.id %}">{{ post.title }}</a> -
                        {% if post.category %}
-                            <a href="{% url 'categories' post.category.category_name %}">{{ post.category }}</a> -
+                            Categoria: <a href="{% url 'categories' post.category.category_name %}">{{ post.category }}</a> -
                        {% endif %}
                        {{ post.post_date }} <br> {{ post.body|slice:"200"|safe }}
                     </div>

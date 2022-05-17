@@ -9,7 +9,7 @@
         {% if user.is_authenticated %}
         <br>
            <li>
-               {{ category.category_name }}- <a href="{% url 'category_confirm' category.id %}">Deletar!</a>
+               {{ category.category_name }} - <a href="{% url 'category_confirm' category.id %}">Deletar!</a>
            </li>
         {% endif %}
     {% endfor %}
